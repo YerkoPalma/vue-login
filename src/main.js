@@ -4,11 +4,14 @@ import VueRouter from 'vue-router'
 Vue.use(require('vue-resource'))
 Vue.use(require('vue-router'))
 
+Vue.config.debug = true
+
 /**
  *  Components
  */
  import Login from './components/login.vue'
  import Register from './components/register.vue'
+ import UserLayout from './components/user.vue'
 
 /**
  *  Main app is an extension of Vue to be used with Vueroueter
@@ -23,6 +26,9 @@ router.map({
   },
   '/register' : {
     component : Register
+  },
+  '/user' : {
+    component : UserLayout
   }
 })
 

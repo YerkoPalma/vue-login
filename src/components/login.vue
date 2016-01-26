@@ -51,7 +51,7 @@
                   <input type="checkbox"> Remember me
                 </label>
               </div>
-              <button class="btn btn-success btn-block text-center">Login</button>
+              <button class="btn btn-success btn-block text-center" v-on:click="login">Login</button>
               <div class="horizontal-divider">
                 <span>or</span>
               </div>
@@ -69,3 +69,14 @@
     </div>
   </div>
 </template>
+
+<script>
+  export default{
+    methods: {
+      login: function(){
+        //if all the login process is valid, go to the logged in layout
+        this.$route.router.go('/user');
+      }
+    }
+  }
+</script>
