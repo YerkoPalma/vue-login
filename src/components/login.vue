@@ -28,7 +28,6 @@
         }
       }
     }
-
 </style>
 
 <template>
