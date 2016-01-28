@@ -38,12 +38,12 @@
         <div class="panel-body">
               <div class="form-group">
                 <label for="loginEmail">Email address</label>
-                <input type="email" class="form-control" id="loginEmail" placeholder="Email">
+                <input type="email" class="form-control" id="loginEmail" placeholder="Email" v-model="user.email">
 
               </div>
               <div class="form-group">
                 <label for="loginPassword">Password <span class="pull-right"><a>forgot password?</a></span></label>
-                <input type="password" class="form-control" id="loginPassword" placeholder="Password">
+                <input type="password" class="form-control" id="loginPassword" placeholder="Password" v-model="user.password">
 
               </div>
               <div class="checkbox">
@@ -72,10 +72,31 @@
 
 <script>
   export default{
+    data() {
+      return {
+        user: {
+          email: '',
+          password: ''
+        }
+      }
+    },
     methods: {
       login: function(){
         //if all the login process is valid, go to the logged in layout
-        this.$route.router.go('/user');
+        this.$http.post(
+          this.$parent.backend + 'login', //post uri
+          {
+            'email' : this.user.email,
+            'password' : this.user.password
+          }
+        ).then( (response) => {
+          this.$route.router.go('/user') //success
+        }, (response) => {
+          console.log("error")
+          this.$route.router.go('/') //success
+        })
+
+
       }
     }
   }

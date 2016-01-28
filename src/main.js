@@ -16,7 +16,14 @@ Vue.config.debug = true
 /**
  *  Main app is an extension of Vue to be used with Vueroueter
  */
-let App = Vue.extend({})
+let App = Vue.extend({
+  data() {
+    return {
+        backend: 'http://localhost:8080/'
+    }    
+  }
+})
+
 let router = new VueRouter()
 
 /* eslint-disable no-new */
