@@ -52,7 +52,7 @@
                 <label for="registerRepeatPassword">Repeat Password</label>
                 <input type="password" class="form-control" id="registerRepeatPassword" placeholder="Password">
               </div>
-              <button class="btn btn-primary btn-block text-center">Register</button>
+              <button class="btn btn-primary btn-block text-center" v-on:click="register">Register</button>
               <div class="horizontal-divider">
                 <span>or</span>
               </div>
@@ -70,3 +70,14 @@
     </div>
   </div>
 </template>
+
+<script>
+  export default{
+    methods: {
+      register: function(){
+        //if all the login process is valid, go to the logged in layout
+        this.$route.router.go('/user');
+      }
+    }
+  }
+</script>
