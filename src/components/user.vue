@@ -10,17 +10,57 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="#"><i class="fa fa-chevron-left"></i> Empresa</a>
+        <a class="navbar-brand" @click="showLeft = true"><i class="fa fa-chevron-left"></i> Empresa</a>
+        <sidebar :show.sync="showLeft" placement="left" header="Title" :width="350">
+        ...
+        </sidebar>
       </div>
+
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
         <ul class="nav navbar-nav navbar-right">
           <li><a href="#">Link</a></li>
-          <li><a href="#">Link</a></li>
+          <li><a href="#">{{user.username}}</a></li>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
   </nav>
 </template>
+
+<script>
+import sidebar from './aside.vue'
+
+export default{
+  ready() {
+    //here should check that there is an user connected
+    /*this.$http.get(
+      this.$parent.backend + 'profile'
+    ).then( (response) => {
+      this.user = response.local
+    }, (response) => {
+      console.log("error")
+      this.$route.router.go('/login')
+    })*/
+  },
+  data() {
+    return {
+      user: {
+        email: 'john.doe@mail.com',
+        username: 'John Doe'
+      },
+      showLeft: false
+    }
+  },
+  components: {
+    sidebar
+  }
+}
+</script>
+
+<style>
+  a {
+    cursor: pointer;
+  }
+</style>
