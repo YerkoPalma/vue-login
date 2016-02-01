@@ -71,6 +71,8 @@
 </template>
 
 <script>
+  import cookie from 'cookie-cutter'
+
   export default{
     data() {
       return {
@@ -90,13 +92,15 @@
             'password' : this.user.password
           }
         ).then( (response) => {
+
+          if (typeof response.headers('x-session-token') !== 'undefined')
+            cookie.set('token', response.headers('x-session-token'))
+
           this.$route.router.go('/user') //success
         }, (response) => {
           console.log("error")
           this.$route.router.go('/') //success
         })
-
-
       }
     }
   }

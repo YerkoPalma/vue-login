@@ -38,7 +38,7 @@
         <div class="panel-body">
               <div class="form-group">
                 <label for="registerEmail">Email address</label>
-                <input type="email" class="form-control" id="registerEmail" placeholder="Email">
+                <input type="email" class="form-control" id="registerEmail" placeholder="Email" v-model="user.email">
               </div>
               <div class="form-group">
                 <label for="registerUsername">Username</label>
@@ -46,7 +46,7 @@
               </div>
               <div class="form-group">
                 <label for="registerPassword">Password</label>
-                <input type="password" class="form-control" id="registerPassword" placeholder="Password">
+                <input type="password" class="form-control" id="registerPassword" placeholder="Password" v-model="user.password">
               </div>
               <div class="form-group">
                 <label for="registerRepeatPassword">Repeat Password</label>
@@ -73,10 +73,36 @@
 
 <script>
   export default{
+    data() {
+      return {
+        user: {
+          email: '',
+          password: ''
+        }
+      }
+    },
     methods: {
       register: function(){
-        //if all the login process is valid, go to the logged in layout
-        this.$route.router.go('/user');
+
+        this.$http.post(
+          this.$parent.backend + 'signup', //post uri
+          {
+            'email' : this.user.email,
+            'password' : this.user.password
+          }
+        ).then( (response) => {
+
+          if (typeof response.headers('x-session-token') !== 'undefined') {
+            cookie.set('token', response.headers('x-session-token'))
+          } else {
+            console.log(JSON.stringify(response.headers()))
+          }
+
+          this.$route.router.go('/user') //success
+        }, (response) => {
+          console.log("error")
+          this.$route.router.go('/') //success
+        })
       }
     }
   }
