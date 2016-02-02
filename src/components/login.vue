@@ -74,6 +74,11 @@
   import cookie from 'cookie-cutter'
 
   export default{
+    //http: {
+    //  headers: {
+    //    'Access-Control-Expose-Headers' : 'x-session-token'
+    //  }
+    //},
     data() {
       return {
         user: {
@@ -93,8 +98,11 @@
           }
         ).then( (response) => {
 
-          if (typeof response.headers('x-session-token') !== 'undefined')
+          if (typeof response.headers('x-session-token') !== 'undefined') {
             cookie.set('token', response.headers('x-session-token'))
+          } else {
+            console.log(JSON.stringify(response.headers()))
+          }
 
           this.$route.router.go('/user') //success
         }, (response) => {

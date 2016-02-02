@@ -5,6 +5,9 @@ Vue.use(require('vue-resource'))
 Vue.use(require('vue-router'))
 
 Vue.config.debug = true
+Vue.http.headers.common['Access-Control-Expose-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, x-session-token, *'
+Vue.http.headers.common['Access-Control-Allow-Origin'] = '*'
+Vue.http.headers.common['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept, x-session-token, *'
 
 /**
  *  Components
@@ -20,7 +23,7 @@ let App = Vue.extend({
   data() {
     return {
         backend: 'http://localhost:8080/'
-    }    
+    }
   }
 })
 
