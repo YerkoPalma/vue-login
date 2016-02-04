@@ -42,7 +42,7 @@
               </div>
               <div class="form-group">
                 <label for="registerUsername">Username</label>
-                <input type="email" class="form-control" id="registerUsername" placeholder="Username">
+                <input type="email" class="form-control" id="registerUsername" placeholder="Username" v-model="user.username">
               </div>
               <div class="form-group">
                 <label for="registerPassword">Password</label>
@@ -72,11 +72,14 @@
 </template>
 
 <script>
+  import cookie from 'cookie-cutter'
+  
   export default{
     data() {
       return {
         user: {
           email: '',
+          username: '',
           password: ''
         }
       }
@@ -88,7 +91,8 @@
           this.$parent.backend + 'signup', //post uri
           {
             'email' : this.user.email,
-            'password' : this.user.password
+            'password' : this.user.password,
+            'username' : this.user.username
           }
         ).then( (response) => {
 

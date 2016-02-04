@@ -31,18 +31,25 @@
 
 <script>
 import sidebar from './aside.vue'
+import cookie from 'cookie-cutter'
 
 export default{
   ready() {
     //here should check that there is an user connected
-    /*this.$http.get(
-      this.$parent.backend + 'profile'
+    this.$http.get(
+      this.$parent.backend + 'profile',
+      {},
+      { headers: {
+        'x-session-token' : cookie.get('token')
+      }}
     ).then( (response) => {
-      this.user = response.local
+      this.user.username = response.data.username
+      this.user.email = response.data.mail
+      //console.log(JSON.stringify(response))
     }, (response) => {
       console.log("error")
       this.$route.router.go('/login')
-    })*/
+    })
   },
   data() {
     return {

@@ -22,7 +22,7 @@ Vue.http.headers.common['Access-Control-Allow-Headers'] = 'Origin, X-Requested-W
 let App = Vue.extend({
   data() {
     return {
-        backend: 'http://localhost:8080/'
+        backend: 'http://nodeauth-yerko.rhcloud.com/'
     }
   }
 })
