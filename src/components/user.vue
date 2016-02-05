@@ -21,8 +21,8 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">Link</a></li>
           <li><a href="#">{{user.username}}</a></li>
+          <li><a v-on:click="logout">Salir</a></li>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
@@ -54,10 +54,27 @@ export default{
   data() {
     return {
       user: {
-        email: 'john.doe@mail.com',
-        username: 'John Doe'
+        email: '',
+        username: ''
       },
       showLeft: false
+    }
+  },
+  methods: {
+    logout: function() {
+      this.$http.post(
+        this.$parent.backend + 'logout', //post uri
+        {},
+        { headers: {
+          'x-session-token' : cookie.get('token')
+        }}
+      ).then( (response) => {
+        cookie.set('token', "", { expires: new Date(0) })
+        this.$route.router.go('/') //success
+      }, (response) => {
+        console.log("error")
+        //this.$route.router.go('/') //success
+      })
     }
   },
   components: {

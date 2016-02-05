@@ -73,8 +73,14 @@
 
 <script>
   import cookie from 'cookie-cutter'
-  
+
   export default{
+    ready() {
+      //ya hay alguien conectado
+      if (typeof cookie.get('token') !== 'undefined'){
+        this.$route.router.go('/user')
+      }
+    },
     data() {
       return {
         user: {

@@ -74,11 +74,12 @@
   import cookie from 'cookie-cutter'
 
   export default{
-    //http: {
-    //  headers: {
-    //    'Access-Control-Expose-Headers' : 'x-session-token'
-    //  }
-    //},
+    ready() {
+      //ya hay alguien conectado
+      if (typeof cookie.get('token') !== 'undefined'){
+        this.$route.router.go('/user') 
+      }
+    },
     data() {
       return {
         user: {
